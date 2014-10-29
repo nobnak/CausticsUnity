@@ -2,6 +2,7 @@
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_BumpMap ("Normal Map", 2D) = "white" {}
+		
 		_Refraction ("Refraction Factor", Float) = 0.7518
 		_Height ("Height", Float) = 1
 	}
