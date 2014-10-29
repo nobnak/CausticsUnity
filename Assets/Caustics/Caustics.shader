@@ -2,6 +2,8 @@
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_BumpMap ("Normal Map", 2D) = "white" {}
+		_Refraction ("Refraction Factor", Float) = 0.7518
+		_Height ("Height", Float) = 1
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -18,6 +20,8 @@
 			
 			sampler2D _MainTex;
 			sampler2D _BumpMap;
+			float _Refraction;
+			float _Height;
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -36,7 +40,13 @@
 			}
 			
 			fixed4 frag(vs2ps IN) : COLOR {
-				fixed4 c = tex2D(_MainTex, IN.uv);
+				float3 v = float3(0, 0, 1);
+				float3 n = UnpackNormal(tex2D(_BumpMap, IN.uv));
+				n.z *= -1;
+				float3 rr = refract(v, n, _Refraction);
+				rr.xy /= rr.z;
+				
+				fixed4 c = tex2D(_MainTex, IN.uv + rr.xy * _Height);
 				return c;
 			}
 			ENDCG
