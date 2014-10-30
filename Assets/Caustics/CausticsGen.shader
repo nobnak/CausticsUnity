@@ -11,6 +11,7 @@
 		
 		Pass {
 			CGPROGRAM
+			#define N 7
 			#pragma vertex vert
 			#pragma fragment frag
 			#include "UnityCG.cginc"
@@ -40,6 +41,12 @@
 				return OUT;
 			}
 			Output frag(vs2ps IN) {
+				float intensity[N];
+				for (uint i = 0; i < N; i++)
+					intensity[i] = 0.0;
+				
+				
+			
 				Output OUT;
 				
 				return OUT;
