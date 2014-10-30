@@ -35,12 +35,12 @@ Material:
       data:
         first:
           name: _Height
-        second: .100000001
+        second: .0399999991
     m_Colors:
       data:
         first:
           name: _LightDir
-        second: {r: 0, g: 0, b: 1, a: 0}
+        second: {r: 0, g: .0399999991, b: 1, a: 0}
       data:
         first:
           name: _Color
