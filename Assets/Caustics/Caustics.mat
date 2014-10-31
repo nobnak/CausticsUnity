@@ -29,6 +29,20 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _CausticTex0
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _CausticTex1
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _Caustics0
         second:
           m_Texture: {fileID: 0}
@@ -43,14 +57,7 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _CausticTex0
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _CausticTex1
+          name: _CausticTex
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -67,7 +74,7 @@ Material:
       data:
         first:
           name: _IFact
-        second: .449999988
+        second: .349999994
     m_Colors:
       data:
         first:

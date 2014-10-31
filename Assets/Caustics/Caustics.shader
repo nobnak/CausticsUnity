@@ -1,9 +1,10 @@
 ﻿Shader "Custom/Caustics" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "black" {}
-		_CausticTex0 ("Caustics Map 0", 2D) = "black" {}
-		_CausticTex1 ("Caustics Map 1", 2D) = "black" {}
+		_CausticTex ("Caustics Map", 2D) = "black" {}
 		_IFact ("Intensity Factor", Float) = 1
+		_Refraction ("Refraction Factor", Float) = 0.7518
+		_Height ("Height", Float) = 0.1
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -23,6 +24,8 @@
 			sampler2D _CausticTex0;
 			sampler2D _CausticTex1;
 			float _IFact;
+			float _Refraction;
+			float _Height;
 
 			struct Input {
 				float4 vertex : POSITION;

@@ -11,8 +11,9 @@ public class Caustics : MonoBehaviour {
 	public Material genMat;
 
 	private Vector4 _texelSize;
-	private RenderTexture _causticsTex0;
-	private RenderTexture _causticsTex1;
+	private RenderTexture _causticYTex0;
+	private RenderTexture _causticYTex1;
+	private RenderTexture _causticTex;
 
 	void OnDisable() { Release(); }
 	void Update () {
@@ -21,35 +22,43 @@ public class Caustics : MonoBehaviour {
 		genMat.SetVector(SHADER_CAUSTICS_TEXEL_SIZE, _texelSize);
 
 		genMat.SetInt(SHADER_NOFFSET, -3);
-		_causticsTex0.DiscardContents();
-		Graphics.Blit(null, _causticsTex0, genMat);
+		_causticYTex0.DiscardContents();
+		Graphics.Blit(null, _causticYTex0, genMat, 0);
 
 		genMat.SetInt(SHADER_NOFFSET, 1);
-		_causticsTex1.DiscardContents();
-		Graphics.Blit(null, _causticsTex1, genMat);
+		_causticYTex1.DiscardContents();
+		Graphics.Blit(null, _causticYTex1, genMat, 0);
+
+		genMat.SetTexture(SHADER_CAUSTICS_TEX0, _causticYTex0);
+		genMat.SetTexture(SHADER_CAUSTICS_TEX1, _causticYTex1);
+		_causticTex.DiscardContents();
+		Graphics.Blit(null, _causticTex, genMat, 1);
 
 		var m = renderer.sharedMaterial;
-		m.SetTexture(SHADER_CAUSTICS_TEX0, _causticsTex0);
-		m.SetTexture(SHADER_CAUSTICS_TEX1, _causticsTex1);
+
 	}
 	
 	void CheckInit() {
-		if (_causticsTex0 != null && _causticsTex0.width == n)
+		if (_causticYTex0 != null && _causticYTex0.width == n)
 			return;
 
 		Release();
 		
 		_texelSize = new Vector4(1f / n, 1f / n, n, n);
 
-		_causticsTex0 = new RenderTexture(n, n, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
-		_causticsTex1 = new RenderTexture(n, n, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
-		_causticsTex0.Create();
-		_causticsTex1.Create();
+		_causticYTex0 = new RenderTexture(n, n, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+		_causticYTex1 = new RenderTexture(n, n, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+		_causticTex = new RenderTexture(n, n, 0, RenderTextureFormat.RFloat, RenderTextureReadWrite.Linear);
+		_causticYTex0.Create();
+		_causticYTex1.Create();
+		_causticTex.Create();
 	}
 	void Release() {
-		if (_causticsTex0 != null)
-			_causticsTex0.Release();
-		if (_causticsTex1 != null)
-			_causticsTex1.Release();
+		if (_causticYTex0 != null)
+			_causticYTex0.Release();
+		if (_causticYTex1 != null)
+			_causticYTex1.Release();
+		if (_causticTex != null)
+			_causticTex.Release();
 	}
 }
