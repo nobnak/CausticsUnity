@@ -2,13 +2,20 @@
 using System.Collections;
 
 public class Caustics : MonoBehaviour {
+	public const string SHADER_CAUSTIC_Y_TEX0 = "_CausticYTex0";
+	public const string SHADER_CAUSTIC_Y_TEX1 = "_CausticYTex1";
+	public const string SHADER_CAUSTIC_TEX = "_CausticTex";
+
 	public const string SHADER_NOFFSET = "_NOffset";
 	public const string SHADER_CAUSTICS_TEXEL_SIZE = "_Caustics_TS";
-	public const string SHADER_CAUSTICS_TEX0 = "_CausticTex0";
-	public const string SHADER_CAUSTICS_TEX1 = "_CausticTex1";
-
+	public const string SHADER_REFRACTION_FACTOR = "_Refraction";
+	public const string SHADER_HEIGHT = "_Height";
+	public const string SHADER_LIGHT_DIR = "_LightDir";
+	public const string SHADER_VIEW_DIR = "_ViewDir";
+	
 	public int n = 512;
 	public Material genMat;
+	public Data data;
 
 	private Vector4 _texelSize;
 	private RenderTexture _causticYTex0;
@@ -20,6 +27,9 @@ public class Caustics : MonoBehaviour {
 		CheckInit();
 
 		genMat.SetVector(SHADER_CAUSTICS_TEXEL_SIZE, _texelSize);
+		genMat.SetFloat(SHADER_REFRACTION_FACTOR, data.RefractionFactor);
+		genMat.SetFloat(SHADER_HEIGHT, data.Height);
+		genMat.SetVector(SHADER_LIGHT_DIR, data.LightDir.normalized);
 
 		genMat.SetInt(SHADER_NOFFSET, -3);
 		_causticYTex0.DiscardContents();
@@ -29,13 +39,16 @@ public class Caustics : MonoBehaviour {
 		_causticYTex1.DiscardContents();
 		Graphics.Blit(null, _causticYTex1, genMat, 0);
 
-		genMat.SetTexture(SHADER_CAUSTICS_TEX0, _causticYTex0);
-		genMat.SetTexture(SHADER_CAUSTICS_TEX1, _causticYTex1);
+		genMat.SetTexture(SHADER_CAUSTIC_Y_TEX0, _causticYTex0);
+		genMat.SetTexture(SHADER_CAUSTIC_Y_TEX1, _causticYTex1);
 		_causticTex.DiscardContents();
 		Graphics.Blit(null, _causticTex, genMat, 1);
 
 		var m = renderer.sharedMaterial;
-
+		m.SetFloat(SHADER_REFRACTION_FACTOR, data.RefractionFactor);
+		m.SetFloat(SHADER_HEIGHT, data.Height);
+		m.SetVector(SHADER_VIEW_DIR, data.ViewDir.normalized);
+		m.SetTexture(SHADER_CAUSTIC_TEX, _causticTex);
 	}
 	
 	void CheckInit() {
@@ -60,5 +73,13 @@ public class Caustics : MonoBehaviour {
 			_causticYTex1.Release();
 		if (_causticTex != null)
 			_causticTex.Release();
+	}
+
+	[System.Serializable]
+	public struct Data {
+		public float RefractionFactor;
+		public float Height;
+		public Vector3 LightDir;
+		public Vector3 ViewDir;
 	}
 }

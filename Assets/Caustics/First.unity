@@ -144,6 +144,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   n: 512
   genMat: {fileID: 2100000, guid: 99ad2e7a8db131c40a567451fadefa4a, type: 2}
+  data:
+    RefractionFactor: .751800001
+    Height: .00999999978
+    LightDir: {x: 0, y: 0, z: 1}
+    ViewDir: {x: 0, y: 0, z: 1}
 --- !u!1 &888964134
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,9 +18,9 @@
 			#include "UnityCG.cginc"
 			
 			float4 _BumpMap_TexelSize;
-			float4 _Caustics_TS;
 
 			sampler2D _BumpMap;
+			float4 _Caustics_TS;
 			float _Refraction;
 			float _Height;
 			float3 _LightDir;
@@ -83,10 +83,10 @@
 			#pragma fragment frag
 			#include "UnityCG.cginc"
 			
-			float4 _CausticTex0_TexelSize;
+			float4 _CausticYTex0_TexelSize;
 						
-			sampler2D _CausticTex0;
-			sampler2D _CausticTex1;
+			sampler2D _CausticYTex0;
+			sampler2D _CausticYTex1;
 			
 			struct Input {
 				float4 vertex : POSITION;
@@ -104,15 +104,15 @@
 				return OUT;
 			}
 			float4 frag(vs2ps IN) : COLOR {
-				float2 dx = _CausticTex0_TexelSize.xy;
+				float2 dx = _CausticYTex0_TexelSize.xy;
 				float I = 0.0;
-				I += tex2D(_CausticTex0, IN.uv + float2(0, +3) * dx).r;
-				I += tex2D(_CausticTex0, IN.uv + float2(0, +2) * dx).g;
-				I += tex2D(_CausticTex0, IN.uv + float2(0, +1) * dx).b;
-				I += tex2D(_CausticTex0, IN.uv).a;
-				I += tex2D(_CausticTex1, IN.uv + float2(0, -1) * dx).r;
-				I += tex2D(_CausticTex1, IN.uv + float2(0, -2) * dx).g;
-				I += tex2D(_CausticTex1, IN.uv + float2(0, -3) * dx).b;
+				I += tex2D(_CausticYTex0, IN.uv + float2(0, +3) * dx).r;
+				I += tex2D(_CausticYTex0, IN.uv + float2(0, +2) * dx).g;
+				I += tex2D(_CausticYTex0, IN.uv + float2(0, +1) * dx).b;
+				I += tex2D(_CausticYTex0, IN.uv).a;
+				I += tex2D(_CausticYTex1, IN.uv + float2(0, -1) * dx).r;
+				I += tex2D(_CausticYTex1, IN.uv + float2(0, -2) * dx).g;
+				I += tex2D(_CausticYTex1, IN.uv + float2(0, -3) * dx).b;
 				
 				return float4(I, 0, 0, 1);
 			}

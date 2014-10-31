@@ -31,16 +31,16 @@ Material:
       data:
         first:
           name: _Refraction
-        second: .751800001
+        second: 0
       data:
         first:
           name: _Height
-        second: .0399999991
+        second: 0
     m_Colors:
       data:
         first:
           name: _LightDir
-        second: {r: 0, g: .0399999991, b: 1, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _Color
