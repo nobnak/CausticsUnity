@@ -4,7 +4,7 @@
 		_BumpMap ("Normal Map", 2D) = "white" {}
 		_CausticTex ("Caustics Map", 2D) = "black" {}
 		_ViewDir ("View Dir", Vector) = (0, 0, 1, 0)
-		_IFact ("Intensity Factor", Float) = 1
+		_IFact ("Intensity Factor", Vector) = (0.1, 1, 0, 0)
 		_Refraction ("Refraction Factor", Float) = 0.7518
 		_Height ("Height", Float) = 0.1
 	}
@@ -30,7 +30,7 @@
 			sampler2D _BumpMap;
 			sampler2D _CausticTex;
 			float3 _ViewDir;
-			float _IFact;
+			float2 _IFact;
 			float _Refraction;
 			float _Height;
 
@@ -59,7 +59,7 @@
 				float2 uvG = IN.uv + rr.xy * _Height;
 				float4 cMain = tex2D(_MainTex, TRANSFORM_TEX(uvG, _MainTex));
 				float caustic = tex2D(_CausticTex, TRANSFORM_TEX(uvG, _CausticTex)).r;
-				return cMain * (1.0 + caustic * _IFact);
+				return dot(_IFact, float2(1, caustic)) * cMain;
 			}
 			ENDCG
 		}
