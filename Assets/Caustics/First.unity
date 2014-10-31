@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72185a9b7f96754d81247a8d5eadfb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  n: 512
+  n: 256
   genMat: {fileID: 2100000, guid: 99ad2e7a8db131c40a567451fadefa4a, type: 2}
   data:
     RefractionFactor: .751800001
