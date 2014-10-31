@@ -19,6 +19,9 @@
 			#pragma fragment frag
 			#include "UnityCG.cginc"
 			
+			float4 _MainTex_ST;
+			float4 _BumpMap_ST;
+			float4 _CausticTex_ST;
 			float4 _MainTex_TexelSize;
 			float4 _BumpMap_TexelSize;
 			float4 _CausticTex_TexelSize;
@@ -48,14 +51,14 @@
 			}
 			
 			float4 frag(vs2ps IN) : COLOR {
-				float3 n = UnpackNormal(tex2D(_BumpMap, IN.uv));
+				float3 n = UnpackNormal(tex2D(_BumpMap, TRANSFORM_TEX(IN.uv, _BumpMap)));
 				n.z *= -1;
 				float3 rr = refract(_ViewDir, n, _Refraction);
 				rr.xy /= rr.z;
 				
 				float2 uvG = IN.uv + rr.xy * _Height;
-				float4 cMain = tex2D(_MainTex, uvG);
-				float caustic = tex2D(_CausticTex, uvG).r;
+				float4 cMain = tex2D(_MainTex, TRANSFORM_TEX(uvG, _MainTex));
+				float caustic = tex2D(_CausticTex, TRANSFORM_TEX(uvG, _CausticTex)).r;
 				return cMain * (1.0 + caustic * _IFact);
 			}
 			ENDCG

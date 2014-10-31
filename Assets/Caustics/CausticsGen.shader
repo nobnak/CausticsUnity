@@ -21,6 +21,7 @@
 
 			sampler2D _BumpMap;
 			float4 _Caustics_TS;
+			float2 _UvC_Offset;
 			float _Refraction;
 			float _Height;
 			float3 _LightDir;
@@ -40,7 +41,7 @@
 			vs2ps vert(Input IN) {
 				vs2ps OUT;
 				OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
-				OUT.uvC = IN.uv;
+				OUT.uvC = IN.uv + _UvC_Offset;
 				OUT.pG = IN.uv * _Caustics_TS.zw;
 				return OUT;
 			}
