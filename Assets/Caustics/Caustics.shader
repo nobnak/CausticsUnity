@@ -14,6 +14,7 @@
 		
 		Pass {
 			CGPROGRAM
+			//#define PACKED_NORMAL
 			#pragma target 5.0
 			#pragma vertex vert
 			#pragma fragment frag
@@ -51,8 +52,12 @@
 			}
 			
 			float4 frag(vs2ps IN) : COLOR {
+				#ifdef PACKED_NORMAL
 				float3 n = UnpackNormal(tex2D(_BumpMap, TRANSFORM_TEX(IN.uv, _BumpMap)));
 				n.z *= -1;
+				#else
+				float3 n = tex2D(_BumpMap, TRANSFORM_TEX(IN.uv, _BumpMap)).xyz;
+				#endif
 				float3 rr = refract(_ViewDir, n, _Refraction);
 				rr.xy /= rr.z;
 				

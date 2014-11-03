@@ -84,6 +84,8 @@ GameObject:
   - 4: {fileID: 186712078}
   - 33: {fileID: 186712077}
   - 23: {fileID: 186712076}
+  - 64: {fileID: 186712081}
+  - 114: {fileID: 186712080}
   - 114: {fileID: 186712079}
   m_Layer: 0
   m_Name: Quad
@@ -146,9 +148,40 @@ MonoBehaviour:
   genMat: {fileID: 2100000, guid: 99ad2e7a8db131c40a567451fadefa4a, type: 2}
   data:
     RefractionFactor: .751800001
-    Height: .0399999991
+    Height: .00999999978
     LightDir: {x: 0, y: 0, z: 1}
     ViewDir: {x: 0, y: 0, z: 1}
+--- !u!114 &186712080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186712075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f7d297d30eaf44cbd7020b453a67da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sim: {fileID: 2100000, guid: 4b8dfbae77b2ce5409725fc25ace6a43, type: 2}
+  brushMat: {fileID: 2100000, guid: 29db29e198e67a049859f0916ea7c444, type: 2}
+  nGrids: 256
+  l: 30
+  fps: 100
+  tension: 3
+  density: 10
+--- !u!64 &186712081
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186712075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &888964134
 GameObject:
   m_ObjectHideFlags: 0

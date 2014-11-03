@@ -5,6 +5,7 @@ public class Caustics : MonoBehaviour {
 	public const string SHADER_CAUSTIC_Y_TEX0 = "_CausticYTex0";
 	public const string SHADER_CAUSTIC_Y_TEX1 = "_CausticYTex1";
 	public const string SHADER_CAUSTIC_TEX = "_CausticTex";
+	public const string SHADER_BUMP_TEX = "_BumpMap";
 
 	public const string SHADER_NOFFSET = "_NOffset";
 	public const string SHADER_CAUSTICS_TEXEL_SIZE = "_Caustics_TS";
@@ -33,6 +34,7 @@ public class Caustics : MonoBehaviour {
 		genMat.SetFloat(SHADER_REFRACTION_FACTOR, data.RefractionFactor);
 		genMat.SetFloat(SHADER_HEIGHT, data.Height);
 		genMat.SetVector(SHADER_LIGHT_DIR, data.LightDir);
+		genMat.SetTexture(SHADER_BUMP_TEX, renderer.sharedMaterial.GetTexture(SHADER_BUMP_TEX));
 
 		genMat.SetInt(SHADER_NOFFSET, -3);
 		_causticYTex0.DiscardContents();
