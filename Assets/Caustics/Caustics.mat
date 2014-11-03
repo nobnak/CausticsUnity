@@ -70,7 +70,7 @@ Material:
       data:
         first:
           name: _Height
-        second: .00999999978
+        second: .0399999991
       data:
         first:
           name: _IFact

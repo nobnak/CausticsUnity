@@ -148,7 +148,7 @@ MonoBehaviour:
   genMat: {fileID: 2100000, guid: 99ad2e7a8db131c40a567451fadefa4a, type: 2}
   data:
     RefractionFactor: .751800001
-    Height: .00999999978
+    Height: .0399999991
     LightDir: {x: 0, y: 0, z: 1}
     ViewDir: {x: 0, y: 0, z: 1}
 --- !u!114 &186712080
@@ -165,7 +165,7 @@ MonoBehaviour:
   sim: {fileID: 2100000, guid: 4b8dfbae77b2ce5409725fc25ace6a43, type: 2}
   brushMat: {fileID: 2100000, guid: 29db29e198e67a049859f0916ea7c444, type: 2}
   nGrids: 256
-  l: 30
+  l: 20
   fps: 100
   tension: 3
   density: 10

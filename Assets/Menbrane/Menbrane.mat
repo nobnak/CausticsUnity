@@ -24,7 +24,7 @@ Material:
       data:
         first:
           name: _T
-        second: 21.8453331
+        second: 49.1520004
       data:
         first:
           name: _Dt
@@ -32,7 +32,7 @@ Material:
       data:
         first:
           name: _Dx
-        second: .1171875
+        second: .078125
       data:
         first:
           name: _Gain

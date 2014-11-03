@@ -11,6 +11,7 @@
 		
 		Pass {
 			CGPROGRAM
+			//#define PACKED_NORMAL
 			#define N 4
 			#pragma target 5.0
 			#pragma vertex vert
@@ -47,8 +48,12 @@
 			}
 			
 			float2 GetIntersection(float2 uvC) {
+				#ifdef PACKED_NORMAL
 				float3 n = UnpackNormal(tex2D(_BumpMap, uvC));
 				n.z *= -1;
+				#else
+				float3 n = tex2D(_BumpMap, uvC).xyz;
+				#endif
 				float3 rr = refract(_LightDir, n, _Refraction);
 				rr.xy /= rr.z;
 				
